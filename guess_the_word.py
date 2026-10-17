@@ -43,7 +43,15 @@ def check_guess(word, word_incomplete):
     display results or keep guessing message; allow user to keep guessing
     until puzzle solved or they run out of guesses.
     """
-    
+
+    # Get user guess
+    guess = get_guess()
+    print(f"\nYou guessed {guess}\n")
+    if guess in word:
+        print("Good guess!")
+    else:
+        print("Bad guess!")       
+
                   
     
 
@@ -54,8 +62,8 @@ def main():
     print(word)
     word_incomplete = prepare_word(word)
     print(word_incomplete)
-    guess = get_guess()
-    print(guess)
+    check_guess(word, word_incomplete)
+    
     
     
 
