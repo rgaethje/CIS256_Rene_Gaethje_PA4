@@ -17,14 +17,15 @@ GAME_WORD_LIST = [
 def generate_random_word():
     """Generate random word from a predefined list (GAME_WORD_LIST)"""
     idx = random.randint(0, len(GAME_WORD_LIST))
-    word = GAME_WORD_LIST[idx]
+    #word = GAME_WORD_LIST[idx]
+    word = "alligator"
     return word
 
 def prepare_word(word):
     """Set up placeholder view for puzzle word"""
     word_incomplete = []
     for letter in word:
-        word_incomplete.append(" _ ")
+        word_incomplete.append("_")
     return word_incomplete
 
 def get_guess():
@@ -44,13 +45,20 @@ def check_guess(word, word_incomplete):
     until puzzle solved or they run out of guesses.
     """
 
-    # Get user guess
-    guess = get_guess()
-    print(f"\nYou guessed {guess}\n")
-    if guess in word:
-        print("Good guess!")
-    else:
-        print("Bad guess!")       
+    while "_" in word_incomplete:
+        print("Puzzle: ", *word_incomplete)
+        # Get user guess
+        guess = get_guess()
+        print(f"\nYou guessed {guess}\n")
+        # Check if guess is NOT in the word puzzle
+        if guess not in word:
+            print("Letter is not in puzzle. Please try again.") 
+        else:
+            print("Good guess!")
+            # If guess is in word, update all matching instances
+            for idx, letter in enumerate(word):
+                if guess.lower() == letter.lower():
+                    word_incomplete[idx] = guess          
 
                   
     
@@ -61,7 +69,7 @@ def main():
     word = generate_random_word()
     print(word)
     word_incomplete = prepare_word(word)
-    print(word_incomplete)
+    print(*word_incomplete)
     check_guess(word, word_incomplete)
     
     
