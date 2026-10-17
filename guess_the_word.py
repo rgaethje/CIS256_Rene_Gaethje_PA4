@@ -39,18 +39,35 @@ def get_guess():
 def check_guess(word, word_incomplete):
     """
     Check to see if guess is in the puzzle word; update word_incomplete
-    with all instances of the guessed letter that are found in puzzle word;
-    display results or keep guessing message; allow user to keep guessing
-    until puzzle solved or they run out of guesses.
+    with all instances of the guessed letter that are found in word;
+    allow user to keep guessing letters until the puzzle is solved or
+    until they reach max_incorrect guess count.
     """
 
-    while "_" in word_incomplete:
+    incorrect_letters = []  # store previously guesses letters
+    incorrect_count = 0  # keep track of how many incorrect guesses
+    max_incorrect = 6
+
+    # Keep asking for user guesses while game is in process
+    while "_" in word_incomplete and incorrect_count < max_incorrect:
+        print("*************************")
+        print("   GUESS THE WORD GAME   ")
+        print("*************************\n")
         print("Puzzle: ", *word_incomplete)
+        print("Guessed letters: ", *incorrect_letters)
+
         # Get user guess
         guess = get_guess()
+        if guess in incorrect_letters:
+            print(f"You already guessed '{guess}'. Try a different letter!")
+            # Leave loop; ask user for new letter; do not count as incorrect guess
+            continue 
         print(f"\nYou guessed {guess}\n")
+
         # Check if guess is NOT in the word puzzle
         if guess not in word:
+            incorrect_letters.append(guess)
+            incorrect_count +=1
             print("Letter is not in puzzle. Please try again.") 
         else:
             print("Good guess!")
@@ -58,10 +75,16 @@ def check_guess(word, word_incomplete):
             for idx, letter in enumerate(word):
                 if guess.lower() == letter.lower():
                     word_incomplete[idx] = guess
-    # Print puzzle word 1 last time at end of game. 
+
+    # Display puzzle word 1 last time at end of game. 
     print("Puzzle: ", *word_incomplete)
 
-                  
+    # Display win or lose message
+    if "_" not in word_incomplete:
+        print(f"\nCongratulations! You solved the puzzle!\n "
+              f"The word is {word}\n")
+    else:
+        print(f"\nToo many incorrect guesses! You lose! :-(\nThe word is {word}\n")              
     
 
 
