@@ -30,7 +30,11 @@ def prepare_word(word):
 def get_guess():
     """Get guess from user; validate input is alpha; force lowercase"""
     while True:
-        pass
+        guess = input("\nPick a letter.").strip().lower()
+        if len(guess) == 1 and guess.isalpha():
+            return guess
+        else:
+            print("Invalid input. Please enter a single letter form A - Z.")
 
 def check_guess(word, word_incomplete):
     """
@@ -39,8 +43,8 @@ def check_guess(word, word_incomplete):
     display results or keep guessing message; allow user to keep guessing
     until puzzle solved or they run out of guesses.
     """
-
     
+                  
     
 
 
@@ -50,6 +54,9 @@ def main():
     print(word)
     word_incomplete = prepare_word(word)
     print(word_incomplete)
+    guess = get_guess()
+    print(guess)
+    
     
 
 
