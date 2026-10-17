@@ -2,12 +2,18 @@
 # CIS256 Fall 2026
 # Programming Assignment 4 (Testing file)
 
-from guess_the_word import generate_random_word, GAME_WORD_LIST, check_guess
+from guess_the_word import generate_random_word, GAME_WORD_LIST, prepare_word, check_guess
 
 def test_generate_random_word_from_list():
     """Test whether the selected word comes from the predefined list."""
     word = generate_random_word()
     assert word in GAME_WORD_LIST
+
+def test_prepare_word():
+    """Test that prepare_word creates the correct number of underscores."""
+    word = "dog"
+    word_incomplete = prepare_word(word)
+    assert word_incomplete == ['_', '_', '_']
 
 def test_check_guess(monkeypatch):
     """Test correct guesses will solve puzzle successfully."""
