@@ -16,9 +16,8 @@ GAME_WORD_LIST = [
 
 def generate_random_word():
     """Generate random word from a predefined list (GAME_WORD_LIST)"""
-    idx = random.randint(0, len(GAME_WORD_LIST))
-    #word = GAME_WORD_LIST[idx]
-    word = "alligator"
+    idx = random.randint(0, len(GAME_WORD_LIST) - 1)
+    word = GAME_WORD_LIST[idx]
     return word
 
 def prepare_word(word):
@@ -58,7 +57,9 @@ def check_guess(word, word_incomplete):
             # If guess is in word, update all matching instances
             for idx, letter in enumerate(word):
                 if guess.lower() == letter.lower():
-                    word_incomplete[idx] = guess          
+                    word_incomplete[idx] = guess
+    # Print puzzle word 1 last time at end of game. 
+    print("Puzzle: ", *word_incomplete)
 
                   
     
@@ -67,9 +68,9 @@ def check_guess(word, word_incomplete):
 def main():
     """Main program logic"""
     word = generate_random_word()
-    print(word)
+    # print(word)
     word_incomplete = prepare_word(word)
-    print(*word_incomplete)
+    # print(*word_incomplete)
     check_guess(word, word_incomplete)
     
     
