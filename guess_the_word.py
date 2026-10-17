@@ -14,6 +14,64 @@ GAME_WORD_LIST = [
     "thunderstorm", "rollercoaster", "dragonfly", "moonlight"
 ]
 
+STRIKES = [
+    # 0 incorrect guesses
+    r""" ____  ____  ____  ____  ____  ____ 
+|    ||    ||    ||    ||    ||    |
+|    ||    ||    ||    ||    ||    |
+|    ||    ||    ||    ||    ||    |
+|____||____||____||____||____||____|
+    """,
+    
+    # 1 incorrect guess
+    r""" ____  ____  ____  ____  ____  ____ 
+|\  /||    ||    ||    ||    ||    |
+| \/ ||    ||    ||    ||    ||    |
+| /\ ||    ||    ||    ||    ||    |
+|/__\||____||____||____||____||____|
+    """,
+    
+    # 2 incorrect guesses
+    r""" ____  ____  ____  ____  ____  ____ 
+|\  /||\  /||    ||    ||    ||    |
+| \/ || \/ ||    ||    ||    ||    |
+| /\ || /\ ||    ||    ||    ||    |
+|/__\||/__\||____||____||____||____|
+    """,
+    
+    # 3 incorrect guesses
+    r""" ____  ____  ____  ____  ____  ____ 
+|\  /||\  /||\  /||    ||    ||    |
+| \/ || \/ || \/ ||    ||    ||    |
+| /\ || /\ || /\ ||    ||    ||    |
+|/__\||/__\||/__\||____||____||____|
+    """,
+    
+    # 4 incorrect guesses
+    r""" ____  ____  ____  ____  ____  ____ 
+|\  /||\  /||\  /||\  /||    ||    |
+| \/ || \/ || \/ || \/ ||    ||    |
+| /\ || /\ || /\ || /\ ||    ||    |
+|/__\||/__\||/__\||/__\||____||____|
+    """,
+
+    # 5 incorrect guesses
+    r""" ____  ____  ____  ____  ____  ____ 
+|\  /||\  /||\  /||\  /||\  /||    |
+| \/ || \/ || \/ || \/ || \/ ||    |
+| /\ || /\ || /\ || /\ || /\ ||    |
+|/__\||/__\||/__\||/__\||/__\||____|
+    """,
+
+    # 6 incorrect guesses
+    r""" ____  ____  ____  ____  ____  ____ 
+|\  /||\  /||\  /||\  /||\  /||\  /|
+| \/ || \/ || \/ || \/ || \/ || \/ |
+| /\ || /\ || /\ || /\ || /\ || /\ |
+|/__\||/__\||/__\||/__\||/__\||/__\|
+    """
+]
+
 def generate_random_word():
     """Generate random word from a predefined list (GAME_WORD_LIST)"""
     idx = random.randint(0, len(GAME_WORD_LIST) - 1)
@@ -50,9 +108,10 @@ def check_guess(word, word_incomplete):
 
     # Keep asking for user guesses while game is in process
     while "_" in word_incomplete and incorrect_count < max_incorrect:
-        print("*************************")
-        print("   GUESS THE WORD GAME   ")
-        print("*************************\n")
+        print("    *************************")
+        print("       GUESS THE WORD GAME   ")
+        print("    *************************")
+        print(STRIKES[incorrect_count])
         print("Puzzle: ", *word_incomplete)
         print("Guessed letters: ", *incorrect_letters)
 
@@ -62,7 +121,6 @@ def check_guess(word, word_incomplete):
             print(f"You already guessed '{guess}'. Try a different letter!")
             # Leave loop; ask user for new letter; do not count as incorrect guess
             continue 
-        print(f"\nYou guessed {guess}\n")
 
         # Check if guess is NOT in the word puzzle
         if guess not in word:
@@ -76,7 +134,11 @@ def check_guess(word, word_incomplete):
                 if guess.lower() == letter.lower():
                     word_incomplete[idx] = guess
 
-    # Display puzzle word 1 last time at end of game. 
+    # Display puzzle word 1 last time at end of game.
+    print("    *************************")
+    print("       GUESS THE WORD GAME   ")
+    print("    *************************")
+    print(STRIKES[incorrect_count])
     print("Puzzle: ", *word_incomplete)
 
     # Display win or lose message
