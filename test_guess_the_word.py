@@ -2,17 +2,27 @@
 # CIS256 Fall 2026
 # Programming Assignment 4 (Testing file)
 
-from guess_the_word import generate_random_word
+from guess_the_word import generate_random_word, GAME_WORD_LIST, check_guess
 
 def test_generate_random_word_from_list():
     """Test whether the selected word comes from the predefined list."""
     word = generate_random_word()
     assert word in GAME_WORD_LIST
 
-def test_generate_random_word_not_in_list():
-    """Test whether the selected word IS NOT in predefined list (Negative case)."""
-    word = generate_randome_word()
-    assert beachfront not in GAME_WORD_LIST
-    assert word != "beachfront"
+def test_check_guess(monkeypatch):
+    """Test correct guesses will solve puzzle successfully."""
+    word = "cat"
+    word_incomplete = ['_', '_', '_']
 
+    # Simulate user input
+    inputs = iter(['d','e','c','c','a','t'])
+
+    # use hardcoded values to simulate user input 
+    monkeypatch.setattr('guess_the_word.get_guess', lambda: next(inputs))
+
+    # Run function
+    check_guess(word, word_incomplete)
+
+    # Assert that the puzzle is now solved
+    assert "_" not in word_incomplete
     
