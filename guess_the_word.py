@@ -11,6 +11,8 @@ GAME_WORD_LIST = [
 
 def generate_random_word():
     """Generate random word from a predefined list (GAME_WORD_LIST)"""
+    idx = random.randint(0, len(GAME_WORD_LIST))
+    word = GAME_WORD_LIST[idx]
     return word
 
 def prepare_word(word):
@@ -21,6 +23,7 @@ def prepare_word(word):
 def get_guess():
     """Get guess from user; validate input is alpha; force lowercase"""
     while True:
+        pass
 
 def check_guess(word, word_incomplete):
     """
@@ -36,6 +39,7 @@ def check_guess(word, word_incomplete):
 
 def main():
     """Main program logic"""
+    print(generate_random_word())
     
 
 
