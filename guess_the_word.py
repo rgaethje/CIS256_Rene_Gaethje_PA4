@@ -4,6 +4,7 @@
 
 import random
 
+
 # Define constants
 GAME_WORD_LIST = [
     "oceanfront", "lakehouse", "river", "alligator", "dinosaur", "sailboat",
@@ -108,6 +109,7 @@ def check_guess(word, word_incomplete):
 
     # Keep asking for user guesses while game is in process
     while "_" in word_incomplete and incorrect_count < max_incorrect:
+        # Format game screen
         print("    *************************")
         print("       GUESS THE WORD GAME   ")
         print("    *************************")
@@ -126,20 +128,21 @@ def check_guess(word, word_incomplete):
         if guess not in word:
             incorrect_letters.append(guess)
             incorrect_count +=1
-            print("Letter is not in puzzle. Please try again.") 
+            print("Letter is not in puzzle. Please try again.\n") 
         else:
-            print("Good guess!")
+            print("Good guess!\n")
             # If guess is in word, update all matching instances
             for idx, letter in enumerate(word):
                 if guess.lower() == letter.lower():
                     word_incomplete[idx] = guess
 
-    # Display puzzle word 1 last time at end of game.
+    # Display game title and status with filled word at end of game.
     print("    *************************")
     print("       GUESS THE WORD GAME   ")
     print("    *************************")
     print(STRIKES[incorrect_count])
     print("Puzzle: ", *word_incomplete)
+    print("Guessed letters: ", *incorrect_letters)
 
     # Display win or lose message
     if "_" not in word_incomplete:
@@ -149,17 +152,12 @@ def check_guess(word, word_incomplete):
         print(f"\nToo many incorrect guesses! You lose! :-(\nThe word is {word}\n")              
     
 
-
 def main():
     """Main program logic"""
     word = generate_random_word()
-    # print(word)
     word_incomplete = prepare_word(word)
-    # print(*word_incomplete)
     check_guess(word, word_incomplete)
-    
-    
-    
+  
 
 
 if __name__ == "__main__":
