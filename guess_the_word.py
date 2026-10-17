@@ -6,7 +6,12 @@ import random
 
 # Define constants
 GAME_WORD_LIST = [
-    "oceanfront", "lakehouse", "river", "alligator", "dinosaur", "sailboat"
+    "oceanfront", "lakehouse", "river", "alligator", "dinosaur", "sailboat",
+    "heartstrings", "hippopotamus", "lovestruck", "rollerskating",
+    "lighthouse", "coastline", "waterfall", "shipwreck",
+    "driftwood", "coralreef", "sunshine", "daydream",
+    "sweetheart", "butterflies", "breathtaking", "parasailing",
+    "thunderstorm", "rollercoaster", "dragonfly", "moonlight"
 ]
 
 def generate_random_word():
@@ -18,6 +23,8 @@ def generate_random_word():
 def prepare_word(word):
     """Set up placeholder view for puzzle word"""
     word_incomplete = []
+    for letter in word:
+        word_incomplete.append(" _ ")
     return word_incomplete
 
 def get_guess():
@@ -39,7 +46,10 @@ def check_guess(word, word_incomplete):
 
 def main():
     """Main program logic"""
-    print(generate_random_word())
+    word = generate_random_word()
+    print(word)
+    word_incomplete = prepare_word(word)
+    print(word_incomplete)
     
 
 
